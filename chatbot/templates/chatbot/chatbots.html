@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %}
+Chatbot
+{% endblock %}
+
+{% load static %}
+
+{% block css %}
+<!--    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">-->
+  <link rel="stylesheet" href="{% static 'css/chatbot1.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          href="#"
+          class="list-group-item list-group-item-action py-2 ripple"
+          aria-current="true"
+        >
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Historique</span>
+        </a>
+          {% for hist in hists %}
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple ">
+             <span> {{ hist.message }}</span>
+            </a>
+          {% endfor %}
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+  <a class="navbar-brand" href="#">
+        <img
+          src="{% static 'image/cookie.png' %}"
+          height="50"
+          alt="MDB Logo"
+          loading="lazy"
+        />
+      </a>
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Notification dropdown -->
+
+        <!-- Icon -->
+        <li class="nav-item">
+          <a class="nav-link me-3 me-lg-0" href="#">
+            <i class="fas fa-fill-drip"></i>
+          </a>
+        </li>
+        <!-- Icon -->
+        <li class="nav-item me-3 me-lg-0">
+          <a class="nav-link" href="#">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+
+        <!-- Icon dropdown -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link me-3 me-lg-0"
+              href="{% url 'logout' %}"
+            >
+              Logout
+            </a>
+
+          </li>
+
+
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+              class="rounded-circle"
+              height="22"
+              alt="Avatar"
+              loading="lazy"
+            />
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header><br><br>
+                <div class="d-flex justify-content-center mb-4">
+                                    <div class="img_cont_msg">
+                                        <img src="{% static 'image/cookie.png' %}" class="rounded-circle user_img_msg">
+                                    </div>
+                                    <div >
+                                      <h1>Bienvenue dans Cookie Chatbot</h1>
+
+                                    </div>
+                                </div>
+                <div class="container-fluid h-100">
+			        <div class="row justify-content-center h-100">
+                        <div class="col-md-8 col-xl-6 chat">
+                            <div class="card-body msg_card_body">
+
+
+
+                                <div class="d-flex justify-content-start mb-4">
+                                    <div class="img_cont_msg">
+                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                    </div>
+                                    <div class="msg_cotainer">
+                                       {{ recente.message }}
+
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mb-4">
+                                    <div class="msg_cotainer_send">
+                                         {{ recente.reponse }}
+
+                                    </div>
+                                    <div class="img_cont_msg">
+                                        <img src="{% static 'image/robot.jfif' %}" class="rounded-circle user_img_msg">
+                                    </div>
+                                </div>
+
+						    </div>
+                            <form method="POST" >
+                            {% csrf_token %}
+                            <div class="card-footer">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                                    </div>
+                                     <form method="POST" >
+                                        {% csrf_token %}
+                                        <input type="text" name="messages" class="form-control type_msg" placeholder="Your message...">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="input-group-text send_btn" >
+                                                <i class="fas fa-location-arrow input-group-text send_btn"></i>
+                                            </button>
+                                        </div>
+
+                                </div>
+                                </form>
+                            </div>
+						</div>
+                    </div>
+                </div>
+
+<script>
+    	$(document).ready(function(){
+$('#action_menu_btn').click(function(){
+	$('.action_menu').toggle();
+});
+	});
+</script>
+{% endblock %}
